@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>장바구니 - 노을상사</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
+  <style>
+    .mobile-header { display: none; }
+    @media (max-width: 768px) {
+      .header, .sub-header { display: none !important; }
+      .top-banner { height: 2rem !important; font-size: 0.6875rem !important; padding: 0 0.75rem !important; overflow-x: auto !important; justify-content: center !important; text-align: center !important; -webkit-overflow-scrolling: touch; }
+      .top-banner::-webkit-scrollbar { display: none; }
+      body > div[style*="position:fixed"] { display: none !important; }
+      .mobile-header {
+        display: block;
+        position: sticky;
+        top: 0;
+        z-index: 5000;
+        background: #fff;
+        border-bottom: 1px solid #eee;
+      }
+      .mobile-header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 1rem;
+        height: 3.5rem;
+      }
+      .mobile-header-side {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex: 1;
+      }
+      .mobile-header-side.right { justify-content: flex-end; gap: 1.5rem; }
+      .mobile-hamburger, .mobile-search-toggle, .mobile-header-side a {
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        color: #111;
+        font-size: 1.25rem;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+      }
+      .mobile-hamburger { flex-direction: column; gap: 0.2rem; width: 1.25rem; }
+      .mobile-search-toggle iconify-icon, .mobile-header-side a iconify-icon { width: 1.25rem; height: 1.25rem; }
+      .mobile-hamburger span { display: block; width: 100%; height: 2px; background: #111; }
+      .mobile-logo { display: flex; align-items: center; gap: 0; text-decoration: none; flex-shrink: 0; }
+      .mobile-logo img { width: 2.75rem; height: auto; display: block; }
+      .mobile-logo-text { font-size: 1.1875rem; font-weight: 700; color: #111; white-space: nowrap; margin-left: -0.125rem; }
+      .mobile-search-bar { display: none; padding: 0 1rem 0.75rem; }
+      .mobile-search-bar.open { display: block; }
+      .mobile-search-bar input {
+        width: 100%;
+        height: 2.5rem;
+        border: 1.5px solid #e5e7eb;
+        border-radius: 999px;
+        padding: 0 1rem;
+        font-size: 0.875rem;
+        outline: none;
+        box-sizing: border-box;
+      }
+      .mobile-subnav {
+        display: flex;
+        gap: 1.375rem;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding: 0.625rem 1rem 0.75rem;
+        white-space: nowrap;
+      }
+      .mobile-subnav::-webkit-scrollbar { display: none; }
+      .mobile-subnav a { font-size: 0.875rem; font-weight: 600; color: #333; text-decoration: none; flex-shrink: 0; }
+    }
+:root{--vn0_5:-0.5rem;--vn0_25:-0.25rem;--v0_1563:0.1563rem;--v0_25:0.25rem;--v0_375:0.375rem;--v0_5:0.5rem;--v0_625:0.625rem;--v0_75:0.75rem;--v0_875:0.875rem;--v1:1rem;--v1_125:1.125rem;--v1_25:1.25rem;--v1_5:1.5rem;--v1_75:1.75rem;--v1_875:1.875rem;--v2:2rem;--v2_5:2.5rem;--v2_875:2.875rem;--v3:3rem;--v3_25:3.25rem;--v3_5:3.5rem;--v3_75:3.75rem;--v3_875:3.875rem;--v5:5rem;--v5_625:5.625rem;--v6_25:6.25rem;--v8_75:8.75rem;--v56_25:56.25rem;}@media (max-width:1440px){:root{--vn0_5:-0.7407vh;--vn0_25:-0.3704vh;--v0_1563:0.2316vh;--v0_25:0.3704vh;--v0_375:0.5556vh;--v0_5:0.7407vh;--v0_625:0.9259vh;--v0_75:1.1111vh;--v0_875:1.2963vh;--v1:1.4815vh;--v1_125:1.6667vh;--v1_25:1.8519vh;--v1_5:2.2222vh;--v1_75:2.5926vh;--v1_875:2.7778vh;--v2:2.963vh;--v2_5:3.7037vh;--v2_875:4.2593vh;--v3:4.4444vh;--v3_25:4.8148vh;--v3_5:5.1852vh;--v3_75:5.5556vh;--v3_875:5.7407vh;--v5:7.4074vh;--v5_625:8.3333vh;--v6_25:9.2593vh;--v8_75:12.963vh;--v56_25:83.3333vh;}}
+    *{box-sizing:border-box}
+    html,body{margin:0;overflow-x:clip}
+    body{font-family:"Pretendard Variable",Pretendard,"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:#f5f5f5;color:#111;letter-spacing:0;font-feature-settings:"kern"}
+    ::-webkit-scrollbar{width:0.2083vw}
+    ::-webkit-scrollbar-track{background:transparent}
+    ::-webkit-scrollbar-thumb{background:#ddd;border-radius:2px}
+
+    /* ── 헤더 ── */
+    .top-banner{width:100%;height:var(--v2_5);background:#fff5f5;display:flex;align-items:center;justify-content:center;font-size:0.8125rem;color:#c8001a;letter-spacing:.02em;white-space:nowrap}
+    .header{position:relative;width:100%;height:var(--v5_625);background:#fff}
+    .header::after{display:none}
+    .header-inner{position:relative;display:flex;align-items:center;justify-content:space-between;width:100%;max-width:79.1667vw;height:var(--v5_625);margin:0 auto;padding:0 2.0833vw 0 4.1667vw}
+    .header-left{display:flex;align-items:center}
+    .logo{display:flex;align-items:center;gap:0;text-decoration:none}
+    .logo img{display:block;width:3.2292vw;height:auto;transition:opacity .15s ease}
+    .logo-text{font-family:"Noto Sans KR","Pretendard Variable",Pretendard,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;margin-left:-0.3125vw;color:#111;font-size:1.375rem;font-weight:700;line-height:1;white-space:nowrap}
+    .header-search{position:absolute;left:50%;transform:translateX(-50%);display:flex;align-items:center}
+    .header-search-wrap{position:relative;width:25vw;display:flex;align-items:center}
+    .header-search-input{width:100%;background:transparent;border:none;border-bottom:2px solid #FF0019;outline:none;color:#111;font-size:1.1875rem;font-weight:300;font-family:inherit;padding:var(--v0_375) 1.7708vw var(--v0_375) 0}
+    .header-search-input::placeholder{color:#111}
+    .header-search-btn{position:absolute;right:0;background:none;border:none;cursor:pointer;color:#FF0019;font-size:1.125rem;padding:0;display:flex;align-items:center;line-height:1}
+    .header-utils{display:flex;align-items:center;gap:0}
+    .header-utils-link{font-size:0.9375rem;font-weight:400;color:#555;text-decoration:none;white-space:nowrap;transition:color .2s ease;padding:0 0.625vw}
+    .header-utils-link:hover{color:#111}
+    .header-utils-divider{color:rgba(0,0,0,.18);font-size:0.75rem;font-weight:300;user-select:none}
+    .sub-header{width:100%;height:var(--v3_25);background:#fff}
+    .sub-header-inner{display:flex;align-items:center;width:100%;max-width:79.1667vw;height:100%;margin:0 auto;padding:0 5.2083vw}
+    .sub-header-all{display:inline-flex;align-items:center;justify-content:flex-start;gap:var(--v0_875) 0.7292vw;font-size:1.125rem;font-weight:600;color:#FF0019;text-decoration:none;white-space:nowrap;background:none;padding:0 1.25vw 0 0;height:var(--v3_25);transition:color .2s ease}
+    .sub-header-sep{color:rgba(0,0,0,.18);font-size:0.9375rem;font-weight:300;margin:0 1.0417vw;user-select:none}
+    .sub-header-nav{display:flex;align-items:center;gap:var(--v1_75) 1.4583vw;margin-left:1.0417vw}
+    .sub-header-nav a{font-size:1rem;font-weight:400;color:#333;text-decoration:none;white-space:nowrap;position:relative;transition:color .3s ease}
+    .sub-header-nav a::after{content:'';position:absolute;bottom:var(--vn0_25);left:50%;transform:translateX(-50%);width:0;height:var(--v0_1563);background:#FF0019;border-radius:1px;transition:width .25s}
+    .sub-header-nav a:hover{color:#111}
+    .sub-header-nav a:hover::after{width:100%}
+    .all-category-panel{width:100%;background:#fff;border-bottom:1px solid #e5e7eb;max-height:0;overflow:hidden;transition:max-height .4s ease}
+    .all-category-panel.open{max-height:var(--v56_25)}
+    .all-category-panel-inner{max-width:67.7083vw;margin:0 auto;padding:var(--v3_75) 0 var(--v2_5);display:grid;grid-template-columns:repeat(6,1fr);gap:var(--v3) 1.25vw;align-items:start}
+    .cat-group{display:flex;flex-direction:column}
+    .cat-main{font-size:0.9375rem;font-weight:700;color:#111;text-decoration:none;padding-bottom:var(--v0_5);margin-bottom:var(--v1);border-bottom:1px solid #f0f0f0;white-space:nowrap}
+    .cat-sub{font-size:0.9375rem;font-weight:400;color:#666;text-decoration:none;padding:var(--v0_875) 0;white-space:nowrap;transition:color .15s}
+    .cat-sub:hover{color:#FF0019}
+    .cat-contact{font-size:0.9375rem;color:#888;padding:var(--v0_875) 0;white-space:nowrap}
+
+    /* ── 장바구니 본문 ── */
+    .cart-container{max-width:66.6667vw;margin:0 auto;padding:var(--v3) 1.0417vw var(--v6_25)}
+    .cart-page-title{font-size:1.625rem;font-weight:700;color:#111;margin-bottom:var(--v2)}
+
+    .cart-layout{display:grid;grid-template-columns:1fr 20.8333vw;gap:var(--v1_5) 1.25vw;align-items:start}
+
+    /* 빈 장바구니 */
+    .cart-empty{background:#fff;border:1px solid #e8e8e8;border-radius:8px;padding:var(--v5) 1.25vw;text-align:center}
+    .cart-empty-icon{font-size:3.25rem;color:#ddd;margin-bottom:var(--v1_25)}
+    .cart-empty-msg{font-size:1.0625rem;color:#aaa;margin-bottom:var(--v1_75)}
+    .cart-empty-btn{display:inline-block;padding:var(--v0_875) 1.875vw;background:#FF0019;color:#fff;text-decoration:none;border-radius:4px;font-size:0.9375rem;font-weight:700;letter-spacing:.02em}
+
+    /* 장바구니 아이템 카드 */
+    .cart-item{background:#fff;border:1px solid #e8e8e8;border-radius:8px;padding:var(--v1_25) 1.25vw;margin-bottom:var(--v0_625);display:flex;gap:var(--v1_125) 0.9375vw;position:relative}
+    .cart-item-img{width:6.25rem;height:6.25rem;flex-shrink:0;background:#ececec;border-radius:6px;overflow:hidden;display:flex;align-items:center;justify-content:center;color:#ccc;font-size:1.875rem;border:1px solid #e8e8e8}
+    .cart-item-img img{width:100%;height:100%;object-fit:cover}
+    .cart-item-body{flex:1;min-width:0}
+    .cart-item-name{font-size:1rem;font-weight:700;color:#111;margin-bottom:var(--v0_5);padding-right:1.6667vw}
+    .cart-item-meta{font-size:0.8125rem;color:#888;line-height:1.9;margin-bottom:var(--v0_625)}
+    .cart-item-sizes{display:flex;flex-wrap:wrap;gap:var(--v0_375) 0.3125vw;margin-bottom:var(--v0_875)}
+    .size-badge{display:inline-flex;align-items:center;padding:var(--v0_25) 0.5729vw;background:#f5f5f5;border-radius:999px;font-size:0.8125rem;color:#555;border:1px solid #eee}
+    .cart-item-footer{display:flex;align-items:center;justify-content:space-between}
+    .cart-item-qty-lbl{font-size:0.8125rem;color:#aaa}
+    .cart-item-price-wrap{display:flex;align-items:baseline;gap:var(--v0_5) 0.4167vw}
+    .cart-item-disc-lbl{font-size:0.8125rem;color:#FF0019;font-weight:600}
+    .cart-item-price{font-size:1.1875rem;font-weight:700;color:#111}
+    .cart-del-btn{position:absolute;top:var(--v1);right:0.8333vw;width:1.75rem;height:1.75rem;display:flex;align-items:center;justify-content:center;background:none;border:none;cursor:pointer;color:#ccc;font-size:0.9375rem;border-radius:50%;transition:all .15s}
+    .cart-del-btn:hover{color:#FF0019;background:#fff0f0}
+
+    /* 전체 선택/삭제 바 */
+    .cart-action-bar{display:flex;align-items:center;justify-content:space-between;padding:0 0.2083vw;margin-bottom:var(--v0_75)}
+    .cart-check-all{display:flex;align-items:center;gap:var(--v0_5) 0.4167vw;cursor:pointer;font-size:0.9375rem;color:#555}
+    .cart-check-all input[type=checkbox]{accent-color:#FF0019;width:1.0625rem;height:1.0625rem;cursor:pointer}
+    .cart-del-selected{background:none;border:1.5px solid #ddd;border-radius:4px;padding:var(--v0_375) 0.7813vw;font-size:0.8125rem;color:#555;cursor:pointer;font-family:inherit;transition:all .15s}
+    .cart-del-selected:hover{border-color:#FF0019;color:#FF0019}
+
+    /* 주문 요약 박스 */
+    .summary-box{background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:var(--v2) 1.6667vw;position:sticky;top:var(--v1_5)}
+    .summary-box-title{font-size:1.25rem;font-weight:700;margin-bottom:var(--v1_25);padding-bottom:var(--v1_125);border-bottom:1px solid #f0f0f0}
+    .summary-row{display:flex;justify-content:space-between;align-items:center;padding:var(--v0_875) 0;font-size:1rem;border-bottom:1px solid #f5f5f5}
+    .summary-row:last-of-type{border-bottom:none}
+    .summary-lbl{color:#888}
+    .summary-val{font-weight:600;color:#111}
+    .summary-final{display:flex;justify-content:space-between;align-items:center;padding:var(--v1_25) 0 0;border-top:2px solid #111;margin-top:var(--v0_5)}
+    .summary-final-lbl{font-size:1.125rem;font-weight:700}
+    .summary-final-amt{font-size:1.875rem;font-weight:700;color:#FF0019}
+    .cart-order-btn{width:100%;height:var(--v3_875);background:#FF0019;border:none;border-radius:6px;color:#fff;font-size:1.125rem;font-weight:700;font-family:inherit;cursor:pointer;margin-top:var(--v1_25);letter-spacing:.02em;transition:background .15s}
+    .cart-order-btn:hover{background:#cc0014}
+    .cart-continue-btn{width:100%;height:var(--v3_25);background:#fff;border:1.5px solid #ddd;border-radius:6px;color:#666;font-size:1rem;font-weight:600;font-family:inherit;cursor:pointer;margin-top:var(--v0_625);transition:all .15s}
+    .cart-continue-btn:hover{border-color:#bbb;color:#111}
+  </style>
+</head>
+<body>
+
+<div class="top-banner">🏭&nbsp; &nbsp;단체복 공장 직납&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;후불결제 가능&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;기업·관공서 전용 맞춤제작</div>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="header-left">
+      <a href="index.html" class="logo" aria-label="노을상사">
+        <img src="./img/노을상사.png" alt="노을상사 로고" />
+        <span class="logo-text">(주)노을상사</span>
+      </a>
+    </div>
+    <div class="header-search">
+      <form class="header-search-wrap" action="search.html">
+        <input type="text" name="q" class="header-search-input" placeholder="상품을 검색하세요" />
+        <button type="submit" class="header-search-btn" aria-label="검색"><i class="fa-solid fa-magnifying-glass"></i></button>
+      </form>
+    </div>
+    <div class="header-utils">
+      <a href="login.html" class="header-utils-link">로그인</a>
+      <span class="header-utils-divider">|</span>
+      <a href="signup.html" class="header-utils-link">회원가입</a>
+      <span class="header-utils-divider">|</span>
+      <a href="#" class="header-utils-link">고객센터</a>
+      <span class="header-utils-divider">|</span>
+      <a href="cart.html" class="header-utils-link" id="cartCountLink">장바구니(0)</a>
+    </div>
+  </div>
+</header>
+
+<div class="sub-header">
+  <div class="sub-header-inner">
+    <a href="#" class="sub-header-all" id="allCategoryBtn">
+      <svg width="26" height="26" viewBox="0 0 22 22" fill="none"><line x1="2" y1="5.5" x2="20" y2="5.5" stroke="#FF0019" stroke-width="2" stroke-linecap="round"/><line x1="2" y1="11" x2="20" y2="11" stroke="#FF0019" stroke-width="2" stroke-linecap="round"/><line x1="2" y1="16.5" x2="20" y2="16.5" stroke="#FF0019" stroke-width="2" stroke-linecap="round"/></svg>
+      전체보기
+    </a>
+    <span class="sub-header-sep">|</span>
+    <nav class="sub-header-nav">
+      <a href="brand.html">브랜드</a><a href="#">주문방법</a><a href="#">인쇄방법</a><a href="#">납품사례</a><a href="#">구매후기</a><a href="#">이벤트</a><a href="#">파트너십</a>
+    </nav>
+    <div style="display:flex;gap:var(--v1) 0.8333vw;margin-left:auto;flex-shrink:0;position:relative;top:var(--vn0_5)">
+      <a href="#" style="padding:0 1.5625vw;height:var(--v2_875);display:flex;align-items:center;background:#FF0019;color:#fff;font-size:0.9375rem;font-weight:600;text-decoration:none;border-radius:4px;border:1px solid transparent;letter-spacing:0.02em;white-space:nowrap">견적문의</a>
+      <a href="#" style="padding:0 1.5625vw;height:var(--v2_875);display:flex;align-items:center;background:#fff;color:#FF0019;font-size:0.9375rem;font-weight:600;text-decoration:none;border-radius:4px;border:1px solid #FF0019;letter-spacing:0.02em;white-space:nowrap">시안확인</a>
+    </div>
+  </div>
+</div>
+
+  <!-- 모바일 헤더 -->
+  <header class="mobile-header">
+    <div class="mobile-header-inner">
+      <div class="mobile-header-side">
+        <button class="mobile-hamburger" id="mobileHamburger" aria-label="메뉴"><span></span><span></span><span></span></button>
+        <button class="mobile-search-toggle" id="mobileSearchToggle" aria-label="검색"><iconify-icon icon="ph:magnifying-glass-bold"></iconify-icon></button>
+      </div>
+      <a href="index.html" class="mobile-logo" aria-label="노을상사">
+        <img src="./img/노을상사.png" alt="노을상사 로고" />
+        <span class="mobile-logo-text">(주)노을상사</span>
+      </a>
+      <div class="mobile-header-side right">
+        <a href="login.html" aria-label="마이페이지"><iconify-icon icon="ph:user-bold"></iconify-icon></a>
+        <a href="cart.html" aria-label="장바구니" id="mobileCartLink"><iconify-icon icon="ph:shopping-cart-simple-bold"></iconify-icon></a>
+      </div>
+    </div>
+    <div class="mobile-search-bar" id="mobileSearchBar">
+      <form action="search.html">
+        <input type="text" name="q" placeholder="상품을 검색하세요" />
+      </form>
+    </div>
+    <nav class="mobile-subnav">
+      <a href="brand.html">브랜드</a>
+      <a href="#">주문방법</a>
+      <a href="#">인쇄방법</a>
+      <a href="#">납품사례</a>
+      <a href="#">구매후기</a>
+      <a href="#">이벤트</a>
+      <a href="#">파트너십</a>
+    </nav>
+  </header>
+  <script>
+    (function(){
+      var hamburger = document.getElementById('mobileHamburger');
+      var searchToggle = document.getElementById('mobileSearchToggle');
+      var searchBar = document.getElementById('mobileSearchBar');
+      if(hamburger){
+        hamburger.addEventListener('click', function(){
+          var panel = document.getElementById('allCategoryPanel');
+          if(panel) panel.classList.toggle('open');
+        });
+      }
+      if(searchToggle && searchBar){
+        searchToggle.addEventListener('click', function(){
+          searchBar.classList.toggle('open');
+        });
+      }
+    })();
+  </script>
+
+
+<div class="all-category-panel" id="allCategoryPanel">
+  <div class="all-category-panel-inner">
+    <div class="cat-group"><a href="category.html?cat=NOEUL 하이앤드 단체복" class="cat-main">NOEUL 하이앤드 단체복</a><a href="category.html?cat=NOEUL 하이앤드 단체복&amp;sub=NOEUL 티셔츠" class="cat-sub">NOEUL 티셔츠</a><a href="category.html?cat=NOEUL 하이앤드 단체복&amp;sub=NOEUL 점퍼" class="cat-sub">NOEUL 점퍼</a></div>
+    <div class="cat-group"><a href="category.html?cat=단체 티셔츠" class="cat-main">단체 티셔츠</a><a href="category.html?cat=단체 티셔츠&amp;sub=라운드 티셔츠" class="cat-sub">라운드 티셔츠</a><a href="category.html?cat=단체 티셔츠&amp;sub=카라 티셔츠" class="cat-sub">카라 티셔츠</a><a href="category.html?cat=단체 티셔츠&amp;sub=브이넥 티셔츠" class="cat-sub">브이넥 티셔츠</a><a href="category.html?cat=단체 티셔츠&amp;sub=맨투맨 티셔츠" class="cat-sub">맨투맨 티셔츠</a><a href="category.html?cat=단체 티셔츠&amp;sub=후드티 후드집업" class="cat-sub">후드티 후드집업</a><a href="category.html?cat=단체 티셔츠&amp;sub=민소매 목폴라" class="cat-sub">민소매 목폴라</a></div>
+    <div class="cat-group"><a href="category.html?cat=단체 조끼" class="cat-main">단체 조끼</a><a href="category.html?cat=단체 조끼&amp;sub=V넥 이벤트용 조끼" class="cat-sub">V넥 이벤트용 조끼</a><a href="category.html?cat=단체 조끼&amp;sub=카라 조끼" class="cat-sub">카라 조끼</a><a href="category.html?cat=단체 조끼&amp;sub=작업 조끼" class="cat-sub">작업 조끼</a><a href="category.html?cat=단체 조끼&amp;sub=패딩 조끼" class="cat-sub">패딩 조끼</a></div>
+    <div class="cat-group"><a href="category.html?cat=단체 점퍼" class="cat-main">단체 점퍼</a><a href="category.html?cat=단체 점퍼&amp;sub=바람막이 점퍼" class="cat-sub">바람막이 점퍼</a><a href="category.html?cat=단체 점퍼&amp;sub=항공 야구점퍼" class="cat-sub">항공 야구점퍼</a><a href="category.html?cat=단체 점퍼&amp;sub=플리스 자켓" class="cat-sub">플리스 자켓</a><a href="category.html?cat=단체 점퍼&amp;sub=겨울 패딩점퍼" class="cat-sub">겨울 패딩점퍼</a><a href="category.html?cat=단체 점퍼&amp;sub=겨울 롱점퍼" class="cat-sub">겨울 롱점퍼</a></div>
+    <div class="cat-group"><a href="category.html?cat=바지" class="cat-main">바지</a><a href="category.html?cat=바지&amp;sub=반바지/7부" class="cat-sub">반바지/7부</a><a href="category.html?cat=바지&amp;sub=긴바지" class="cat-sub">긴바지</a></div>
+    <div class="cat-group"><a href="category.html?cat=모자" class="cat-main">모자</a><a href="category.html?cat=모자&amp;sub=캡모자" class="cat-sub">캡모자</a><a href="category.html?cat=모자&amp;sub=버킷햇" class="cat-sub">버킷햇</a><a href="category.html?cat=모자&amp;sub=썬캡/종이모자" class="cat-sub">썬캡/종이모자</a><a href="category.html?cat=모자&amp;sub=비니" class="cat-sub">비니</a></div>
+    <div class="cat-group"><a href="category.html?cat=아동 단체복" class="cat-main">아동 단체복</a><a href="category.html?cat=아동 단체복&amp;sub=아동용 / 라운드티" class="cat-sub">아동용 / 라운드티</a><a href="category.html?cat=아동 단체복&amp;sub=아동용 / 카라티" class="cat-sub">아동용 / 카라티</a><a href="category.html?cat=아동 단체복&amp;sub=아동용 / 맨투맨" class="cat-sub">아동용 / 맨투맨</a><a href="category.html?cat=아동 단체복&amp;sub=아동용 / 후드티" class="cat-sub">아동용 / 후드티</a><a href="category.html?cat=아동 단체복&amp;sub=아동용 / 바지" class="cat-sub">아동용 / 바지</a><a href="category.html?cat=아동 단체복&amp;sub=아동용 / 가디건" class="cat-sub">아동용 / 가디건</a><a href="category.html?cat=아동 단체복&amp;sub=아동용 / 패딩" class="cat-sub">아동용 / 패딩</a><a href="category.html?cat=아동 단체복&amp;sub=아동용 / 바람막이" class="cat-sub">아동용 / 바람막이</a></div>
+    <div class="cat-group"><a href="category.html?cat=빅사이즈 전용" class="cat-main">빅사이즈 전용</a><a href="category.html?cat=빅사이즈 전용&amp;sub=티셔츠" class="cat-sub">티셔츠</a><a href="category.html?cat=빅사이즈 전용&amp;sub=맨투맨" class="cat-sub">맨투맨</a></div>
+    <div class="cat-group"><a href="category.html?cat=주방의류/가운" class="cat-main">주방의류/가운</a><a href="category.html?cat=주방의류/가운&amp;sub=앞치마" class="cat-sub">앞치마</a><a href="category.html?cat=주방의류/가운&amp;sub=서빙복" class="cat-sub">서빙복</a><a href="category.html?cat=주방의류/가운&amp;sub=조리복" class="cat-sub">조리복</a></div>
+    <div class="cat-group"><a href="category.html?cat=선거복" class="cat-main">선거복</a><a href="category.html?cat=선거복&amp;sub=더불어민주당" class="cat-sub">더불어민주당</a><a href="category.html?cat=선거복&amp;sub=국민의힘" class="cat-sub">국민의힘</a><a href="category.html?cat=선거복&amp;sub=조국혁신당" class="cat-sub">조국혁신당</a><a href="category.html?cat=선거복&amp;sub=개혁신당" class="cat-sub">개혁신당</a><a href="category.html?cat=선거복&amp;sub=새미래민주당" class="cat-sub">새미래민주당</a><a href="category.html?cat=선거복&amp;sub=정의당" class="cat-sub">정의당</a><a href="category.html?cat=선거복&amp;sub=진보당" class="cat-sub">진보당</a><a href="category.html?cat=선거복&amp;sub=무소속 / 기타정당" class="cat-sub">무소속 / 기타정당</a></div>
+    <div class="cat-group"><a href="category.html?cat=철물/공구 · 안전용품 · 소방용품" class="cat-main">철물/공구 · 안전용품 · 소방용품</a><div style="margin-top:var(--v0_75);display:flex;flex-direction:column;gap:var(--v0_25) 0.2083vw"><span class="cat-contact">대표번호 | 0507-1378-6094</span><span class="cat-contact">카카오톡 | 노을상사</span><span class="cat-contact">E-mail | noeul_2017@naver.com</span></div></div>
+  </div>
+</div>
+
+<script>
+  (function(){
+    var btn = document.getElementById('allCategoryBtn');
+    var mobileBtn = document.getElementById('mobileHamburger');
+    var panel = document.getElementById('allCategoryPanel');
+    var subHeader = document.querySelector('.sub-header');
+    if(!btn || !panel) return;
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      panel.classList.toggle('open');
+      if(subHeader) subHeader.style.borderBottom = panel.classList.contains('open') ? 'none' : '';
+    });
+    document.addEventListener('click', function(e){
+      if(mobileBtn && mobileBtn.contains(e.target)) return;
+      if(!btn.contains(e.target) && !panel.contains(e.target)){
+        panel.classList.remove('open');
+        if(subHeader) subHeader.style.borderBottom = '';
+      }
+    });
+  })();
+</script>
+
+<main>
+  <div class="cart-container">
+    <div class="cart-page-title">장바구니</div>
+
+    <div class="cart-layout">
+      <!-- 왼쪽: 상품 목록 -->
+      <div>
+        <div class="cart-action-bar">
+          <label class="cart-check-all">
+            <input type="checkbox" id="checkAll" onchange="toggleAll(this)"> 전체선택
+          </label>
+          <button class="cart-del-selected" onclick="deleteSelected()">선택 삭제</button>
+        </div>
+        <div id="cartItems"></div>
+      </div>
+
+      <!-- 오른쪽: 주문 요약 -->
+      <div class="summary-box">
+        <div class="summary-box-title">주문 요약</div>
+        <div class="summary-row">
+          <span class="summary-lbl">상품금액</span>
+          <span class="summary-val" id="sumProduct">0원</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-lbl">배송비</span>
+          <span class="summary-val" id="sumShipping">0원</span>
+        </div>
+        <div class="summary-final">
+          <span class="summary-final-lbl">총 결제금액</span>
+          <span class="summary-final-amt" id="sumTotal">0원</span>
+        </div>
+        <button class="cart-order-btn" onclick="goOrder()">주문하기</button>
+        <button class="cart-continue-btn" onclick="location.href='index.html'">쇼핑 계속하기</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer style="background:#f5f5f5;color:#888;padding:var(--v1_875) 1.25vw var(--v5_625)">
+  <div style="width:100%;max-width:67.7083vw;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:0;margin-bottom:var(--v1_25)">
+      <img src="./img/노을상사.png" alt="노을상사 로고" style="height:var(--v3_25);object-fit:contain;display:block;margin-left:-0.6771vw">
+      <span style="font-size:1.5rem;font-weight:800;color:#111;letter-spacing:.04em;line-height:1;margin-left:-0.2083vw">(주)노을상사</span>
+    </div>
+    <div style="font-size:0.8125rem;color:#888;display:flex;flex-wrap:wrap;align-items:center;gap:0;line-height:2;padding-bottom:var(--v0_625);border-bottom:1px solid #e0e0e0">
+      <span>대표이사 : 고도혁</span><span style="margin:0 0.5208vw;color:#ccc">·</span>
+      <span>개인정보담당자 : 고도혁</span><span style="margin:0 0.5208vw;color:#ccc">·</span>
+      <span>사업자등록번호 : 885-87-03544</span><span style="margin:0 0.5208vw;color:#ccc">·</span>
+      <span>통신판매번호 : 2026-부산 해운대-0131호</span>
+      <span style="flex-basis:100%;height:0"></span>
+      <span>주소 : 경상남도 창원시 진해구 충장로657번길 28</span><span style="margin:0 0.5208vw;color:#ccc">·</span>
+      <span>대표전화 : 02-000-0000</span><span style="margin:0 0.5208vw;color:#ccc">·</span>
+      <span>© 2026 노을상사. All rights reserved.</span>
+    </div>
+    <div style="padding-top:var(--v0_75);display:flex;align-items:center;gap:0;flex-wrap:wrap">
+      <a href="#" style="font-size:0.75rem;color:#888;text-decoration:none">이용약관</a><span style="margin:0 0.5208vw;color:#ccc">ㅣ</span>
+      <a href="#" style="font-size:0.75rem;color:#888;text-decoration:none">개인정보처리방침</a><span style="margin:0 0.5208vw;color:#ccc">ㅣ</span>
+      <a href="#" style="font-size:0.75rem;color:#888;text-decoration:none">FAQ</a><span style="margin:0 0.5208vw;color:#ccc">ㅣ</span>
+      <a href="#" style="font-size:0.75rem;color:#888;text-decoration:none">취소/환불 정책</a><span style="margin:0 0.5208vw;color:#ccc">ㅣ</span>
+      <a href="#" style="font-size:0.75rem;color:#888;text-decoration:none">공지사항</a>
+    </div>
+    <div style="padding-top:var(--v2);display:flex;align-items:center;gap:0;flex-wrap:wrap">
+      <span style="font-size:1.25rem;color:#888;font-weight:600">CS CENTER</span>
+      <span style="margin:0 0.5208vw;color:#ccc">·</span>
+      <span style="font-size:1.25rem;color:#888">0507-1378-6094</span>
+      <span style="margin:0 0.5208vw;color:#ccc">·</span>
+      <span style="font-size:1.25rem;color:#888">주중 10시~18시 (점심시간 12시~13시 / 주말 및 공휴일 제외)</span>
+    </div>
+    <div style="padding-top:var(--v2_5);display:flex;gap:var(--v2) 1.6667vw;align-items:center;flex-wrap:wrap">
+      <img src="./img/공정거래위원회-removebg-preview.png" alt="공정거래위원회" style="height:var(--v1_5);object-fit:contain;opacity:0.6">
+      <img src="./img/국방전자조달시스템-removebg-preview.png" alt="국방전자조달시스템" style="height:var(--v1_5);object-fit:contain;opacity:0.6">
+      <img src="./img/나라빌-removebg-preview.png" alt="나라빌" style="height:var(--v1_5);object-fit:contain;opacity:0.6">
+      <img src="./img/학교장터-removebg-preview.png" alt="학교장터" style="height:var(--v1_5);object-fit:contain;opacity:0.6">
+      <img src="./img/조달청-removebg-preview.png" alt="조달청" style="height:var(--v1_5);object-fit:contain;opacity:0.6">
+      <img src="./img/서울보증-removebg-preview.png" alt="서울보증" style="height:var(--v1_5);object-fit:contain;opacity:0.6">
+    </div>
+  </div>
+</footer>
+
+<!-- 고정 왼쪽 배너 -->
+<div style="position:fixed;left:2.7083vw;top:55%;transform:translateY(-50%);z-index:9000">
+  <div style="width:6.7708vw;aspect-ratio:9/16;border-radius:8px;box-shadow:2px 2px 12px rgba(0,0,0,0.18);overflow:hidden">
+    <img src="./img/왼쪽배너.png" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block">
+  </div>
+</div>
+<div style="position:fixed;left:2.7083vw;bottom:var(--v8_75);z-index:9000;display:flex;align-items:center;box-shadow:2px 2px 12px rgba(0,0,0,0.18);border-radius:999px">
+  <div style="background:#FF0019;width:3.5rem;height:3.5rem;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative;z-index:1">
+    <iconify-icon icon="ph:phone-bold" width="24" height="24" style="color:#fff"></iconify-icon>
+  </div>
+  <div style="background:#fff;padding:0 0.9375vw 0 2.0833vw;height:var(--v3_5);border-radius:0 999px 999px 0;display:flex;align-items:center;min-width:6.25vw;border:1px solid #FF0019;border-left:none;margin-left:-1.4583vw">
+    <span style="font-size:1.25rem;color:#111;font-weight:600">전화상담</span>
+  </div>
+</div>
+
+<!-- 고정 오른쪽 메뉴바 -->
+<div style="position:fixed;right:2.7083vw;top:50%;transform:translateY(-50%);z-index:9000">
+  <div style="background:#fff;border:1px solid #FF0019;border-radius:12px;box-shadow:-2px 2px 12px rgba(0,0,0,0.12);overflow:hidden;display:flex;flex-direction:column;width:3.75vw">
+    <a href="tel:0507-1378-6094" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--v0_375) 0.3125vw;padding:var(--v1_125) 0.5208vw;text-decoration:none;border-bottom:1px solid #f0f0f0">
+      <iconify-icon icon="ph:phone-bold" width="24" height="24" style="color:#FF0019"></iconify-icon>
+      <span style="font-size:0.6875rem;font-weight:700;color:#111;letter-spacing:.02em">전화문의</span>
+    </a>
+    <a href="#" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--v0_375) 0.3125vw;padding:var(--v1_125) 0.5208vw;text-decoration:none;border-bottom:1px solid #f0f0f0">
+      <iconify-icon icon="ph:note-pencil-bold" width="24" height="24" style="color:#FF0019"></iconify-icon>
+      <span style="font-size:0.6875rem;font-weight:700;color:#111;letter-spacing:.02em">견적문의</span>
+    </a>
+    <a href="#" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--v0_375) 0.3125vw;padding:var(--v1_125) 0.5208vw;text-decoration:none;border-bottom:1px solid #f0f0f0">
+      <iconify-icon icon="ph:image-bold" width="24" height="24" style="color:#FF0019"></iconify-icon>
+      <span style="font-size:0.6875rem;font-weight:700;color:#111;letter-spacing:.02em">시안확인</span>
+    </a>
+    <a href="#" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--v0_375) 0.3125vw;padding:var(--v1_125) 0.5208vw;text-decoration:none;border-bottom:1px solid #f0f0f0">
+      <iconify-icon icon="ph:list-checks-bold" width="24" height="24" style="color:#FF0019"></iconify-icon>
+      <span style="font-size:0.6875rem;font-weight:700;color:#111;letter-spacing:.02em">주문방법</span>
+    </a>
+    <a href="#" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--v0_375) 0.3125vw;padding:var(--v1_125) 0.5208vw;text-decoration:none;border-bottom:1px solid #f0f0f0">
+      <iconify-icon icon="simple-icons:kakaotalk" width="24" height="24" style="color:#FF0019"></iconify-icon>
+      <span style="font-size:0.6875rem;font-weight:700;color:#111;letter-spacing:.02em">카카오톡</span>
+    </a>
+    <button onclick="window.scrollTo({top:0,behavior:'smooth'});" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--v0_375) 0.3125vw;padding:var(--v1_125) 0.5208vw;width:100%;background:none;border:none;border-bottom:1px solid #f0f0f0;cursor:pointer">
+      <iconify-icon icon="ph:arrow-up-bold" width="24" height="24" style="color:#FF0019"></iconify-icon>
+      <span style="font-size:0.6875rem;font-weight:700;color:#111;letter-spacing:.02em">TOP</span>
+    </button>
+  </div>
+</div>
+
+<script>
+  /* ── 장바구니 핵심 로직 ── */
+  function getCart(){ return JSON.parse(localStorage.getItem('noeulCart')||'[]'); }
+  function saveCart(c){ localStorage.setItem('noeulCart', JSON.stringify(c)); }
+
+  function updateCartCount(){
+    var c = getCart();
+    var cnt = c.length;
+    var el = document.getElementById('cartCountLink');
+    if(el) el.textContent = '장바구니('+cnt+')';
+  }
+
+  function renderCart(){
+    var cart = getCart();
+    var wrap = document.getElementById('cartItems');
+
+    if(cart.length === 0){
+      wrap.innerHTML =
+        '<div class="cart-empty">'+
+          '<div class="cart-empty-icon"><i class="fa-solid fa-cart-shopping"></i></div>'+
+          '<div class="cart-empty-msg">장바구니가 비어 있습니다.</div>'+
+          '<a href="index.html" class="cart-empty-btn">쇼핑 계속하기</a>'+
+        '</div>';
+      updateSummary();
+      return;
+    }
+
+    wrap.innerHTML = cart.map(function(item, idx){
+      var thumb = item.img
+        ? '<img src="'+item.img+'" alt="상품 이미지">'
+        : '<i class="fa-regular fa-image"></i>';
+      var sizes = (item.sizes||[]).map(function(s){
+        return '<span class="size-badge">'+s.size+' × '+s.qty+'벌</span>';
+      }).join('');
+      var discTxt = item.discRate > 0
+        ? '<span class="cart-item-disc-lbl">'+item.discRate+'% 할인 적용</span>' : '';
+      return (
+        '<div class="cart-item" data-id="'+item.id+'">'+
+          '<input type="checkbox" class="item-check" style="margin-top:0.25rem;accent-color:#FF0019;width:1.0625rem;height:1.0625rem;flex-shrink:0;cursor:pointer;" data-id="'+item.id+'">'+
+          '<div class="cart-item-img">'+thumb+'</div>'+
+          '<div class="cart-item-body">'+
+            '<div class="cart-item-name">'+item.name+'</div>'+
+            '<div class="cart-item-meta">'+
+              '색상 : '+item.color+'&nbsp;&nbsp;|&nbsp;&nbsp;인쇄 : '+item.print+'&nbsp;&nbsp;|&nbsp;&nbsp;포장 : '+item.pack+
+            '</div>'+
+            '<div class="cart-item-sizes">'+sizes+'</div>'+
+            '<div class="cart-item-footer">'+
+              '<span class="cart-item-qty-lbl">총 '+item.totalQty+'벌</span>'+
+              '<div class="cart-item-price-wrap">'+
+                discTxt+
+                '<span class="cart-item-price">'+item.totalAmt.toLocaleString()+'원</span>'+
+              '</div>'+
+            '</div>'+
+          '</div>'+
+          '<button class="cart-del-btn" onclick="deleteItem('+item.id+')" title="삭제"><i class="fa-solid fa-xmark"></i></button>'+
+        '</div>'
+      );
+    }).join('');
+
+    updateSummary();
+    updateCheckAll();
+
+    // 체크박스 변경 시 요약 갱신
+    wrap.querySelectorAll('.item-check').forEach(function(el){
+      el.addEventListener('change', function(){ updateCheckAll(); updateSummary(); });
+    });
+  }
+
+  function getCheckedIds(){
+    return Array.prototype.map.call(
+      document.querySelectorAll('.item-check:checked'),
+      function(el){ return parseInt(el.dataset.id); }
+    );
+  }
+
+  function updateSummary(){
+    var cart = getCart();
+    var checkedIds = getCheckedIds();
+    var selected = cart.filter(function(i){ return checkedIds.indexOf(i.id) !== -1; });
+    var total = selected.reduce(function(s,i){ return s + i.totalAmt; }, 0);
+    var hasSelected = selected.length > 0;
+    var shipping = hasSelected ? (total >= 100000 ? 0 : 3000) : 0;
+    document.getElementById('sumProduct').textContent = total.toLocaleString()+'원';
+    document.getElementById('sumShipping').innerHTML = hasSelected && shipping === 0
+      ? '<span style="color:#FF0019;font-weight:700;">무료</span>'
+      : shipping.toLocaleString()+'원';
+    document.getElementById('sumTotal').textContent = (total + shipping).toLocaleString()+'원';
+  }
+
+  function deleteItem(id){
+    var cart = getCart().filter(function(i){ return i.id !== id; });
+    saveCart(cart);
+    renderCart();
+    updateCartCount();
+  }
+
+  function deleteSelected(){
+    var checked = document.querySelectorAll('.item-check:checked');
+    if(!checked.length){ alert('삭제할 상품을 선택해 주세요.'); return; }
+    var ids = Array.prototype.map.call(checked, function(el){ return parseInt(el.dataset.id); });
+    var cart = getCart().filter(function(i){ return ids.indexOf(i.id) === -1; });
+    saveCart(cart);
+    renderCart();
+    updateCartCount();
+  }
+
+  function toggleAll(checkbox){
+    document.querySelectorAll('.item-check').forEach(function(el){ el.checked = checkbox.checked; });
+    updateSummary();
+  }
+
+  function updateCheckAll(){
+    var all = document.querySelectorAll('.item-check');
+    var checked = document.querySelectorAll('.item-check:checked');
+    var ca = document.getElementById('checkAll');
+    if(ca) ca.checked = all.length > 0 && all.length === checked.length;
+  }
+
+  function goOrder(){
+    var checkedIds = getCheckedIds();
+    if(!checkedIds.length){ alert('주문할 상품을 선택해 주세요.'); return; }
+    location.href = 'order.html?from=cart&ids='+checkedIds.join(',');
+  }
+
+  // 초기화
+  renderCart();
+  updateCartCount();
+</script>
+
+<!-- 채널톡 -->
+<script>
+  (function(){
+    var w=window;if(w.ChannelIO){return;}
+    var ch=function(){ch.c(arguments);};ch.q=[];ch.c=function(args){ch.q.push(args);};w.ChannelIO=ch;
+    var s=document.createElement('script');s.type='text/javascript';s.async=true;
+    s.src='https://cdn.channel.io/plugin/ch-plugin-web.js';
+    var x=document.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);
+    w.ChannelIO('boot',{pluginKey:'cd30ab9c-ef12-4e85-94fe-a6be34dbf34e'});
+  })();
+</script>
+<script>
+(function(){
+  if(!localStorage.getItem('noeulLoggedIn')) return;
+  var utils = document.querySelector('.header-utils');
+  if(!utils) return;
+  var loginA = utils.querySelector('a[href="login.html"]');
+  var signupA = utils.querySelector('a[href="signup.html"]');
+  if(loginA){
+    loginA.textContent = '로그아웃';
+    loginA.href = '#';
+    loginA.onclick = function(e){
+      e.preventDefault();
+      localStorage.removeItem('noeulLoggedIn');
+      location.reload();
+    };
+  }
+  if(signupA){
+    signupA.textContent = '마이페이지';
+    signupA.href = 'mypage.html';
+  }
+})();
+</script></body>
+</html>

@@ -1,0 +1,11 @@
+node_modules/
+kakao-claude/
+kakao_notify.ps1
+kakao_notify.bat
+.claude/
+_backup_before_unit_convert/
+_backup_before_vh_to_rem/
+_backup_before_responsive_vars/
+_backup_before_mobile_header/
+할 일.txt
+__rectSitelogo__SE_Logo_Social-Media_RGB (1).png

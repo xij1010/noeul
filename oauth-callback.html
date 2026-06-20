@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>로그인 처리 중 - 노을상사</title>
+  <style>:root{--v0_625:0.625rem;--v1:1rem;--v1_25:1.25rem;--v1_75:1.75rem;--v3:3rem;--v67_5:67.5rem;}@media (max-width:1440px){:root{--v0_625:0.9259vh;--v1:1.4815vh;--v1_25:1.8519vh;--v1_75:2.5926vh;--v3:4.4444vh;--v67_5:100vh;}}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:"Pretendard Variable",Pretendard,"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:#f4f5f7;display:flex;align-items:center;justify-content:center;min-height:var(--v67_5)}
+    .card{background:#fff;padding:var(--v3) 2.9167vw;text-align:center;box-shadow:0 2px 20px rgba(0,0,0,0.10);max-width:22.9167vw;width:100%}
+    .spinner{width:3rem;height:3rem;border:4px solid #f0f0f0;border-top-color:#FF0019;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto var(--v1_75)}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .title{font-size:1.25rem;font-weight:700;color:#111;margin-bottom:var(--v0_625)}
+    .desc{font-size:0.875rem;color:#888;line-height:1.6}
+    .success-icon{font-size:3rem;margin-bottom:var(--v1_25)}
+    .error-box{background:#fff5f5;border:1px solid #ffd0d0;padding:var(--v1) 0.8333vw;margin-top:var(--v1_25);font-size:0.8125rem;color:#c8001a;text-align:left;line-height:1.6}
+  </style>
+</head>
+<body>
+  <div class="card" id="card">
+    <div class="spinner" id="spinner"></div>
+    <div class="title" id="title">로그인 처리 중...</div>
+    <div class="desc" id="desc">잠시만 기다려 주세요.</div>
+  </div>
+
+  <script>
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      var code = params.get('code');
+      var error = params.get('error');
+      var state = params.get('state');
+      var savedState = sessionStorage.getItem('oauth_state');
+
+      var spinner = document.getElementById('spinner');
+      var title = document.getElementById('title');
+      var desc = document.getElementById('desc');
+
+      function showError(msg) {
+        spinner.style.display = 'none';
+        title.textContent = '로그인 실패';
+        desc.innerHTML = msg;
+      }
+
+      function showSuccess(provider) {
+        var type = sessionStorage.getItem('signup_type');
+        sessionStorage.removeItem('signup_type');
+        if(type === 'general') {
+          window.location.href = '/signup-general-info.html';
+        } else {
+          window.location.href = '/signup-business-info.html';
+        }
+      }
+
+      if (error) {
+        showError('오류: ' + error + '<br>다시 시도해 주세요.');
+        return;
+      }
+
+      if (state && savedState && state !== savedState) {
+        showError('보안 검증에 실패했습니다. 다시 시도해 주세요.');
+        return;
+      }
+
+      sessionStorage.removeItem('oauth_state');
+
+      if (!code) {
+        showError('인증 코드를 받지 못했습니다.');
+        return;
+      }
+
+      // 어떤 provider인지 URL referrer로 판별
+      var iss = params.get('iss') || '';
+      var provider = iss.includes('google') ? 'Google' : (params.get('scope') ? 'Google' : '소셜');
+
+      // 카카오는 code만 오고 iss가 없음
+      if (!iss && !params.get('scope')) provider = '카카오';
+
+      // 실제 서비스에서는 여기서 서버로 code를 전송해 토큰을 발급받아야 합니다.
+      // 현재는 프론트엔드 데모로 성공 화면만 표시합니다.
+      showSuccess(provider);
+    })();
+  </script>
+</body>
+</html>
