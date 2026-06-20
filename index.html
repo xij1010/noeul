@@ -4983,6 +4983,18 @@
             if (!timeline) return;
             var line = timeline.querySelector('.process-line');
             var steps = timeline.querySelectorAll('.process-step');
+
+            if (window.innerWidth <= 768) {
+              timeline.querySelectorAll('iconify-icon').forEach(function(ic) {
+                ic.setAttribute('width', '8');
+                ic.setAttribute('height', '8');
+                var icon = ic.getAttribute('icon');
+                if (icon && icon.endsWith('-bold')) {
+                  ic.setAttribute('icon', icon.slice(0, -5) + '-thin');
+                }
+              });
+            }
+
             if (played('processTimelinePlayed')) {
               line.style.transition = 'none';
               line.style.transform = 'scaleX(1)';
@@ -5011,17 +5023,6 @@
               });
             }, { threshold: 0.3, rootMargin: '0px 0px -15% 0px' });
             obs.observe(timeline);
-
-            if (window.innerWidth <= 768) {
-              timeline.querySelectorAll('iconify-icon').forEach(function(ic) {
-                ic.setAttribute('width', '8');
-                ic.setAttribute('height', '8');
-                var icon = ic.getAttribute('icon');
-                if (icon && icon.endsWith('-bold')) {
-                  ic.setAttribute('icon', icon.slice(0, -5) + '-thin');
-                }
-              });
-            }
           })();
         </script>
         <div id="stats-grid" style="margin-top:var(--v3_75); display:grid; grid-template-columns:repeat(4,1fr); gap:0; border:1px solid #e5e7eb">
