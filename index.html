@@ -4988,10 +4988,6 @@
               timeline.querySelectorAll('iconify-icon').forEach(function(ic) {
                 ic.setAttribute('width', '16');
                 ic.setAttribute('height', '16');
-                var icon = ic.getAttribute('icon');
-                if (icon && icon.endsWith('-bold')) {
-                  ic.setAttribute('icon', icon.slice(0, -5) + '-thin');
-                }
               });
             }
 
