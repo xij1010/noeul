@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
@@ -18,7 +18,7 @@
     .cat-shortcut-wrap { display: none; }
     @media (max-width: 768px) {
       .header, .sub-header { display: none !important; }
-      .top-banner { height: 2rem !important; font-size: 0.625rem !important; padding: 0 0.75rem !important; overflow-x: auto !important; justify-content: center !important; text-align: center !important; -webkit-overflow-scrolling: touch; }
+      .top-banner { height: 2rem !important; font-size: 0.6875rem !important; padding: 0 0.75rem !important; overflow-x: auto !important; justify-content: center !important; text-align: center !important; -webkit-overflow-scrolling: touch; }
       .top-banner::-webkit-scrollbar { display: none; }
       body > div[style*="position:fixed"] { display: none !important; }
       .mobile-header {
@@ -509,7 +509,8 @@
       .why-grid::-webkit-scrollbar { display: none; }
       .why-card { flex: 0 0 75% !important; }
       .review-card:nth-child(n+5) { display: none !important; }
-      footer { padding: 1.5rem 1.25rem 3rem !important; }
+      footer { padding: 1.5rem 1.25rem calc(5rem + env(safe-area-inset-bottom)) !important; }
+      footer > div, footer .section-inner { max-width: 100% !important; }
       .footer-logo-img { height: 2rem !important; }
       .footer-logo-text { font-size: 1.125rem !important; }
       .footer-info-row { font-size: 0.6875rem !important; line-height: 1.7 !important; }
@@ -597,7 +598,7 @@
       .quality-cta { width: min(100%, 18rem) !important; height: 2.75rem !important; margin-top: 1rem !important; align-self: center !important; align-items: center !important; justify-content: center !important; background: #FF0019 !important; color: #fff !important; font-size: 0.9375rem !important; border-radius: 8px !important; }
     }
     html {
-      overflow-x: hidden;
+      overflow-x: clip;
     }
     ::-webkit-scrollbar{width:0.2083vw}
     ::-webkit-scrollbar-track{background:transparent}
@@ -615,7 +616,7 @@
       color: #111;
       letter-spacing: 0;
       font-feature-settings: "kern";
-      overflow-x: hidden;
+      overflow-x: clip;
     }
 
     .top-banner {
@@ -6044,30 +6045,30 @@
 
   <!-- 고정 오른쪽 메뉴바 -->
   <div id="rightMenuBar" style="position:fixed; right:2.7083vw; top:50%; transform:translateY(-50%); z-index:9000">
-    <div style="background:#fff; border:1px solid #FF0019; border-radius:12px; box-shadow:-2px 2px 12px rgba(0,0,0,0.12); overflow:hidden; display:flex; flex-direction:column; width:3.75vw">
+    <div style="background:#fff; border:1px solid #FF0019; border-radius:12px; box-shadow:-2px 2px 12px rgba(0,0,0,0.12); overflow:hidden; display:flex; flex-direction:column; width:auto;min-width:3.75vw">
         <a href="tel:0507-1378-6094" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--v0_375) 0.3125vw; padding:var(--v1_125) 0.5208vw; text-decoration:none; border-bottom:1px solid #f0f0f0">
           <iconify-icon icon="ph:phone-bold" width="24" height="24" style="color:#FF0019"></iconify-icon>
-          <span style="font-size:0.6875rem; font-weight:700; color:#111; letter-spacing:0.02em">전화문의</span>
+          <span style="font-size:0.6875rem; font-weight:700; color:#111; letter-spacing:0.02em; white-space:nowrap">전화문의</span>
         </a>
         <a href="#" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--v0_375) 0.3125vw; padding:var(--v1_125) 0.5208vw; text-decoration:none; border-bottom:1px solid #f0f0f0">
           <iconify-icon icon="ph:note-pencil-bold" width="24" height="24" style="color:#FF0019"></iconify-icon>
-          <span style="font-size:0.6875rem; font-weight:700; color:#111; letter-spacing:0.02em">견적문의</span>
+          <span style="font-size:0.6875rem; font-weight:700; color:#111; letter-spacing:0.02em; white-space:nowrap">견적문의</span>
         </a>
         <a href="#" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--v0_375) 0.3125vw; padding:var(--v1_125) 0.5208vw; text-decoration:none; border-bottom:1px solid #f0f0f0">
           <iconify-icon icon="ph:image-bold" width="24" height="24" style="color:#FF0019"></iconify-icon>
-          <span style="font-size:0.6875rem; font-weight:700; color:#111; letter-spacing:0.02em">시안확인</span>
+          <span style="font-size:0.6875rem; font-weight:700; color:#111; letter-spacing:0.02em; white-space:nowrap">시안확인</span>
         </a>
         <a href="#" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--v0_375) 0.3125vw; padding:var(--v1_125) 0.5208vw; text-decoration:none; border-bottom:1px solid #f0f0f0">
           <iconify-icon icon="ph:list-checks-bold" width="24" height="24" style="color:#FF0019"></iconify-icon>
-          <span style="font-size:0.6875rem; font-weight:700; color:#111; letter-spacing:0.02em">주문방법</span>
+          <span style="font-size:0.6875rem; font-weight:700; color:#111; letter-spacing:0.02em; white-space:nowrap">주문방법</span>
         </a>
         <a href="#" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--v0_375) 0.3125vw; padding:var(--v1_125) 0.5208vw; text-decoration:none; border-bottom:1px solid #f0f0f0">
           <iconify-icon icon="simple-icons:kakaotalk" width="24" height="24" style="color:#FF0019"></iconify-icon>
-          <span style="font-size:0.6875rem; font-weight:700; color:#111; letter-spacing:0.02em">카카오톡</span>
+          <span style="font-size:0.6875rem; font-weight:700; color:#111; letter-spacing:0.02em; white-space:nowrap">카카오톡</span>
         </a>
         <button onclick="window.scrollTo({top:0,behavior:'smooth'});" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--v0_375) 0.3125vw; padding:var(--v1_125) 0.5208vw; width:100%; background:none; border:none; border-bottom:1px solid #f0f0f0; cursor:pointer">
           <iconify-icon icon="ph:arrow-up-bold" width="24" height="24" style="color:#FF0019"></iconify-icon>
-          <span style="font-size:0.6875rem; font-weight:700; color:#111; letter-spacing:0.02em">TOP</span>
+          <span style="font-size:0.6875rem; font-weight:700; color:#111; letter-spacing:0.02em; white-space:nowrap">TOP</span>
         </button>
     </div>
   </div>
