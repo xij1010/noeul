@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
@@ -15,6 +15,8 @@
     .mobile-menu-category-grid { display: none; }
     .mobile-menu-service-grid { display: none; }
     .mobile-menu-cs { display: none; }
+    .mobile-login-hero { display: none; }
+    .mobile-login-form { display: none; }
     @media (max-width: 768px) {
       .header, .sub-header { display: none !important; }
       .top-banner { height: 2rem !important; font-size: 0.6875rem !important; padding: 0 0.75rem !important; overflow-x: auto !important; justify-content: center !important; text-align: center !important; -webkit-overflow-scrolling: touch; }
@@ -82,6 +84,56 @@
       }
       .mobile-subnav::-webkit-scrollbar { display: none; }
       .mobile-subnav a { font-size: 0.875rem; font-weight: 600; color: #333; text-decoration: none; flex-shrink: 0; }
+      main { background: #fff !important; min-height: calc(100vh - 3.5rem) !important; padding: 0 !important; display: block !important; }
+      main > div:not(.mobile-login-hero):not(.mobile-login-form) { display: none !important; }
+      .mobile-login-hero {
+        display: block !important;
+        background: #fff;
+        padding: 2rem 1.25rem 1.75rem;
+        color: #111;
+        white-space: nowrap;
+      }
+      .mobile-login-hero-badge { font-size: 1.5rem; font-weight: 700; color: #FF2233; }
+      .mobile-login-hero-sub { font-size: 1.3125rem; font-weight: 700; color: #111; }
+      .mobile-login-hero-title { margin-top: 0.625rem; font-size: 1.75rem; font-weight: 700; color: #111; white-space: nowrap; }
+      .mobile-login-hero-divider { width: 10%; height: 2px; background: #FF2233; margin: 1.5rem 0; }
+      .mobile-login-hero-desc { font-size: 1.1875rem; font-weight: 500; color: #111; line-height: 1.5; white-space: normal; }
+      .mobile-login-hero-desc .thin { font-weight: 300; }
+      .mobile-login-form {
+        display: block !important;
+        padding: 0 1.25rem 2rem;
+        background: #fff;
+      }
+      .mobile-login-form input[type="text"],
+      .mobile-login-form input[type="password"] {
+        width: 100%; height: 3rem; border: 1.5px solid #e5e7eb; border-radius: 4px;
+        padding: 0 1rem; font-size: 1rem; font-family: inherit; outline: none;
+        box-sizing: border-box; transition: border-color .2s;
+      }
+      .mobile-login-form input:focus { border-color: #FF0019; }
+      .mobile-login-form-row { display: flex; flex-direction: column; gap: 0.75rem; }
+      .mobile-login-form-options { display: flex; align-items: center; justify-content: space-between; margin-top: 0.625rem; }
+      .mobile-login-form-options label { display: flex; align-items: center; gap: 0.375rem; cursor: pointer; font-size: 0.875rem; color: #555; }
+      .mobile-login-form-options input[type="checkbox"] { accent-color: #FF0019; width: 0.9375rem; height: 0.9375rem; cursor: pointer; }
+      .mobile-login-form-options a { font-size: 0.875rem; color: #888; text-decoration: none; }
+      .mobile-login-btn {
+        width: 100%; height: 3.125rem; background: #FF0019; color: #fff;
+        border: none; border-radius: 4px; font-size: 1rem; font-weight: 700;
+        font-family: inherit; cursor: pointer; margin-top: 1rem; letter-spacing: .02em;
+      }
+      .mobile-login-signup { margin-top: 1.25rem; text-align: center; font-size: 0.9375rem; color: #888; }
+      .mobile-login-signup a { font-weight: 700; color: #FF0019; text-decoration: none; margin-left: 0.25rem; }
+      .mobile-login-social { margin-top: 1.5rem; }
+      .mobile-login-social-divider { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+      .mobile-login-social-divider span { font-size: 0.75rem; color: #bbb; white-space: nowrap; }
+      .mobile-login-social-divider::before,
+      .mobile-login-social-divider::after { content: ''; flex: 1; height: 1px; background: #e5e7eb; }
+      .mobile-login-social-btns { display: flex; gap: 0.75rem; justify-content: center; }
+      .mobile-login-social-btns button {
+        width: 3.25rem; height: 3.25rem; border-radius: 50%; border: 1.5px solid #e5e7eb;
+        background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      }
+
       footer { padding: 1.5rem 1.25rem calc(5rem + env(safe-area-inset-bottom)) !important; }
       footer > div { max-width: 100% !important; }
       .footer-logo-img { height: 2rem !important; }
@@ -333,6 +385,7 @@
         line-height: 1;
       }
       .mobile-menu-user .honorific { margin-left: 0.1875rem; }
+      .mob-logout-btn{margin-left:0.5rem;padding:0.125rem 0.375rem;font-size:0.625rem;color:#aaa;background:transparent;border:1px solid #e0e0e0;border-radius:3px;cursor:pointer;font-family:inherit;line-height:1.4;flex-shrink:0}
       .all-category-panel::after {
         content: "";
         position: absolute;
@@ -345,12 +398,12 @@
     }
 :root{--vn0_5:-0.5rem;--vn0_25:-0.25rem;--v0_0625:0.0625rem;--v0_0938:0.0938rem;--v0_1563:0.1563rem;--v0_25:0.25rem;--v0_375:0.375rem;--v0_5:0.5rem;--v0_625:0.625rem;--v0_75:0.75rem;--v0_875:0.875rem;--v0_9375:0.9375rem;--v1:1rem;--v1_125:1.125rem;--v1_25:1.25rem;--v1_5:1.5rem;--v1_75:1.75rem;--v1_875:1.875rem;--v2:2rem;--v2_25:2.25rem;--v2_5:2.5rem;--v2_875:2.875rem;--v3:3rem;--v3_125:3.125rem;--v3_25:3.25rem;--v3_5:3.5rem;--v3_75:3.75rem;--v5:5rem;--v5_625:5.625rem;--v8_75:8.75rem;--v50_625:50.625rem;--v56_25:56.25rem;}@media (max-width:1440px){:root{--vn0_5:-0.7407vh;--vn0_25:-0.3704vh;--v0_0625:0.0926vh;--v0_0938:0.139vh;--v0_1563:0.2316vh;--v0_25:0.3704vh;--v0_375:0.5556vh;--v0_5:0.7407vh;--v0_625:0.9259vh;--v0_75:1.1111vh;--v0_875:1.2963vh;--v0_9375:1.3889vh;--v1:1.4815vh;--v1_125:1.6667vh;--v1_25:1.8519vh;--v1_5:2.2222vh;--v1_75:2.5926vh;--v1_875:2.7778vh;--v2:2.963vh;--v2_25:3.3333vh;--v2_5:3.7037vh;--v2_875:4.2593vh;--v3:4.4444vh;--v3_125:4.6296vh;--v3_25:4.8148vh;--v3_5:5.1852vh;--v3_75:5.5556vh;--v5:7.4074vh;--v5_625:8.3333vh;--v8_75:12.963vh;--v50_625:75vh;--v56_25:83.3333vh;}}
     *{box-sizing:border-box}
-    html{overflow-x:hidden}
+    html{overflow-x:clip}
     ::-webkit-scrollbar{width:0.2083vw}
     ::-webkit-scrollbar-track{background:transparent}
     ::-webkit-scrollbar-thumb{background:#ddd;border-radius:2px}
     ::-webkit-scrollbar-thumb:hover{background:#bbb}
-    body{margin:0;font-family:"Pretendard Variable",Pretendard,"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:#fff;color:#111;overflow-x:hidden}
+    body{margin:0;font-family:"Pretendard Variable",Pretendard,"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:#fff;color:#111;overflow-x:clip}
     .top-banner{width:100%;height:var(--v2_5);background:#fff5f5;display:flex;align-items:center;justify-content:center;font-size:0.8125rem;font-weight:400;color:#c8001a;letter-spacing:.02em;white-space:nowrap}
     .header{width:100%;height:var(--v5_625);background:#fff}
     .header-inner{position:relative;display:flex;align-items:center;justify-content:space-between;width:100%;max-width:79.1667vw;height:var(--v5_625);margin:0 auto;padding:0 2.0833vw 0 4.1667vw}
@@ -453,7 +506,7 @@
         <span class="mobile-logo-text">(주)노을상사</span>
       </a>
       <div class="mobile-header-side right">
-        <a href="login.html" aria-label="마이페이지"><iconify-icon icon="ph:user-bold"></iconify-icon></a>
+        <a href="login.html" id="mobileUserLink" aria-label="마이페이지"><iconify-icon icon="ph:user-bold"></iconify-icon></a>
         <a href="cart.html" aria-label="장바구니" id="mobileCartLink"><iconify-icon icon="ph:shopping-cart-simple-bold"></iconify-icon></a>
       </div>
     </div>
@@ -504,7 +557,7 @@
   <div class="all-category-panel" id="allCategoryPanel">
     <div class="mobile-menu-user" aria-label="사용자">
       <iconify-icon icon="ph:user-circle" width="30" height="30"></iconify-icon>
-      <span><a href="login.html" class="mobile-menu-user-name" id="mobileMenuUserName"><strong id="mobileMenuUserText">로그인</strong><iconify-icon icon="ph:caret-right-bold" width="19" height="19"></iconify-icon></a><span class="honorific" id="mobileMenuHonorific" style="display:none">님</span></span>
+      <span><a href="login.html" class="mobile-menu-user-name" id="mobileMenuUserName"><strong id="mobileMenuUserText">로그인</strong><iconify-icon icon="ph:caret-right-bold" width="19" height="19"></iconify-icon></a><span class="honorific" id="mobileMenuHonorific" style="display:none">님</span></span><button id="mobileMenuLogout" type="button" class="mob-logout-btn" style="display:none">로그아웃</button>
     </div>
     <button class="mobile-menu-close" id="mobileMenuClose" type="button" aria-label="메뉴 닫기">
       <iconify-icon icon="ph:x" width="32" height="32"></iconify-icon>
@@ -566,6 +619,43 @@
   </div>
 
   <main style="background:#f4f5f7;min-height:calc(67.5rem - 11.375rem);display:flex;align-items:center;justify-content:center;padding:var(--v5) 1.25vw">
+    <div class="mobile-login-hero">
+      <span class="mobile-login-hero-badge">3000+</span><span class="mobile-login-hero-sub"> 기업이 선택한</span>
+      <div class="mobile-login-hero-title">단체복 납품 전문 업체</div>
+      <div class="mobile-login-hero-divider"></div>
+      <div class="mobile-login-hero-desc">유니폼<span class="thin">부터,</span> 맞춤 제작 상품<span class="thin">까지!</span></div>
+    </div>
+    <div class="mobile-login-form">
+      <form class="mobile-login-form-row" onsubmit="doLogin(event)">
+        <input type="text" placeholder="이메일 또는 아이디를 입력하세요" onfocus="this.style.borderColor='#FF0019'" onblur="this.style.borderColor='#e5e7eb'">
+        <div>
+          <input type="password" placeholder="비밀번호를 입력하세요" onfocus="this.style.borderColor='#FF0019'" onblur="this.style.borderColor='#e5e7eb'">
+          <div class="mobile-login-form-options">
+            <label><input type="checkbox">로그인 저장</label>
+            <a href="#">이메일/비밀번호 찾기</a>
+          </div>
+        </div>
+        <button type="submit" class="mobile-login-btn">로그인</button>
+      </form>
+      <div class="mobile-login-signup">아직 회원이 아니신가요?<a href="signup.html">회원가입</a></div>
+      <div class="mobile-login-social">
+        <div class="mobile-login-social-divider"><span>간편 로그인</span></div>
+        <div class="mobile-login-social-btns">
+          <!-- 구글 -->
+          <button type="button">
+            <svg width="24" height="24" viewBox="0 0 20 20" fill="none"><path d="M19.6 10.227c0-.709-.064-1.39-.182-2.045H10v3.868h5.382a4.6 4.6 0 01-1.996 3.018v2.51h3.232c1.891-1.742 2.982-4.305 2.982-7.35z" fill="#4285F4"/><path d="M10 20c2.7 0 4.964-.895 6.618-2.423l-3.232-2.509c-.895.6-2.04.955-3.386.955-2.605 0-4.81-1.759-5.595-4.123H1.064v2.59A9.996 9.996 0 0010 20z" fill="#34A853"/><path d="M4.405 11.9A6.01 6.01 0 014.09 10c0-.662.114-1.305.314-1.9V5.51H1.064A9.996 9.996 0 000 10c0 1.614.386 3.14 1.064 4.49L4.405 11.9z" fill="#FBBC05"/><path d="M10 3.98c1.468 0 2.786.505 3.822 1.496l2.868-2.869C14.96 1.003 12.698.001 10 .001A9.996 9.996 0 001.064 5.51l3.34 2.59C5.19 5.74 7.396 3.98 10 3.98z" fill="#EA4335"/></svg>
+          </button>
+          <!-- 카카오톡 -->
+          <button type="button" style="background:#FEE500;border-color:#FEE500;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 3C6.477 3 2 6.582 2 11c0 2.782 1.67 5.228 4.214 6.73L5.09 21.09a.3.3 0 00.43.34l4.43-2.95C10.29 18.49 11.14 18.54 12 18.54c5.523 0 10-3.582 10-8.27S17.523 3 12 3z" fill="#3C1E1E"/></svg>
+          </button>
+          <!-- 네이버 -->
+          <button type="button" style="background:#03C75A;border-color:#03C75A;">
+            <svg width="24" height="24" viewBox="4.5 4.5 15 15" fill="none"><path d="M13.6 12.4L10.1 7H7v10h3.4v-5.4L14 17H17V7h-3.4v5.4z" fill="#fff"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
     <div style="display:flex;width:100%;max-width:67.7083vw;height:var(--v50_625);box-shadow:0 2px 20px rgba(0,0,0,0.10)">
       <!-- 왼쪽 이미지 섹션 -->
       <div style="flex:1;min-width:0;background:#111;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;padding:var(--v3) 2.2917vw">
@@ -783,8 +873,11 @@
   var mobileMenuUserText = document.getElementById('mobileMenuUserText');
   var mobileMenuHonorific = document.getElementById('mobileMenuHonorific');
   if(mobileMenuUserName) mobileMenuUserName.href = 'mypage.html';
+  var mobileUserLink = document.getElementById('mobileUserLink');
+  if(mobileUserLink) mobileUserLink.href = 'mypage.html';
   if(mobileMenuUserText) mobileMenuUserText.textContent = '고도혁';
-  if(mobileMenuHonorific) mobileMenuHonorific.style.display = '';
+  if(mobileMenuHonorific) mobileMenuHonorific.style.display='';
+  var mobLogout=document.getElementById('mobileMenuLogout');if(mobLogout){mobLogout.style.display='';mobLogout.onclick=function(){localStorage.removeItem('noeulLoggedIn');location.reload();};}
   var utils = document.querySelector('.header-utils');
   if(!utils) return;
   var loginA = utils.querySelector('a[href="login.html"]');
@@ -803,5 +896,9 @@
     signupA.href = 'mypage.html';
   }
 })();
-</script></body>
+</script>
+  <!-- 모바일 TOP 버튼 -->
+  <style>#mob-top-btn{display:none}@media(max-width:768px){#mob-top-btn{display:flex;align-items:center;justify-content:center;position:fixed;bottom:5.5rem;right:1rem;width:2.75rem;height:2.75rem;background:#fff;border:1.5px solid #e0e0e0;border-radius:50%;box-shadow:0 2px 10px rgba(0,0,0,.13);cursor:pointer;z-index:3999;color:#555;padding:0;transition:opacity .2s,box-shadow .15s}#mob-top-btn:hover{box-shadow:0 4px 16px rgba(0,0,0,.18)}}}</style>
+  <button id="mob-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="맨 위로"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg></button>
+</body>
 </html>

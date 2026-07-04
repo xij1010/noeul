@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
@@ -412,6 +412,7 @@
         line-height: 1;
       }
       .mobile-menu-user .honorific { margin-left: 0.1875rem; }
+      .mob-logout-btn{margin-left:0.5rem;padding:0.125rem 0.375rem;font-size:0.625rem;color:#aaa;background:transparent;border:1px solid #e0e0e0;border-radius:3px;cursor:pointer;font-family:inherit;line-height:1.4;flex-shrink:0}
       .all-category-panel::after {
         content: "";
         position: absolute;
@@ -583,7 +584,7 @@
         <span class="mobile-logo-text">(주)노을상사</span>
       </a>
       <div class="mobile-header-side right">
-        <a href="login.html" aria-label="마이페이지"><iconify-icon icon="ph:user-bold"></iconify-icon></a>
+        <a href="login.html" id="mobileUserLink" aria-label="마이페이지"><iconify-icon icon="ph:user-bold"></iconify-icon></a>
         <a href="cart.html" aria-label="장바구니" id="mobileCartLink"><iconify-icon icon="ph:shopping-cart-simple-bold"></iconify-icon></a>
       </div>
     </div>
@@ -634,7 +635,7 @@
   <div class="all-category-panel" id="allCategoryPanel">
     <div class="mobile-menu-user" aria-label="사용자">
       <iconify-icon icon="ph:user-circle" width="30" height="30"></iconify-icon>
-      <span><a href="login.html" class="mobile-menu-user-name" id="mobileMenuUserName"><strong id="mobileMenuUserText">로그인</strong><iconify-icon icon="ph:caret-right-bold" width="19" height="19"></iconify-icon></a><span class="honorific" id="mobileMenuHonorific" style="display:none">님</span></span>
+      <span><a href="login.html" class="mobile-menu-user-name" id="mobileMenuUserName"><strong id="mobileMenuUserText">로그인</strong><iconify-icon icon="ph:caret-right-bold" width="19" height="19"></iconify-icon></a><span class="honorific" id="mobileMenuHonorific" style="display:none">님</span></span><button id="mobileMenuLogout" type="button" class="mob-logout-btn" style="display:none">로그아웃</button>
     </div>
     <button class="mobile-menu-close" id="mobileMenuClose" type="button" aria-label="메뉴 닫기">
       <iconify-icon icon="ph:x" width="32" height="32"></iconify-icon>
@@ -1663,8 +1664,11 @@
   var mobileMenuUserText = document.getElementById('mobileMenuUserText');
   var mobileMenuHonorific = document.getElementById('mobileMenuHonorific');
   if(mobileMenuUserName) mobileMenuUserName.href = 'mypage.html';
+  var mobileUserLink = document.getElementById('mobileUserLink');
+  if(mobileUserLink) mobileUserLink.href = 'mypage.html';
   if(mobileMenuUserText) mobileMenuUserText.textContent = '고도혁';
-  if(mobileMenuHonorific) mobileMenuHonorific.style.display = '';
+  if(mobileMenuHonorific) mobileMenuHonorific.style.display='';
+  var mobLogout=document.getElementById('mobileMenuLogout');if(mobLogout){mobLogout.style.display='';mobLogout.onclick=function(){localStorage.removeItem('noeulLoggedIn');location.reload();};}
   var utils = document.querySelector('.header-utils');
   if(!utils) return;
   var loginA = utils.querySelector('a[href="login.html"]');
@@ -1683,5 +1687,9 @@
     signupA.href = 'mypage.html';
   }
 })();
-</script></body>
+</script>
+  <!-- 모바일 TOP 버튼 -->
+  <style>#mob-top-btn{display:none}@media(max-width:768px){#mob-top-btn{display:flex;align-items:center;justify-content:center;position:fixed;bottom:5.5rem;right:1rem;width:2.75rem;height:2.75rem;background:#fff;border:1.5px solid #e0e0e0;border-radius:50%;box-shadow:0 2px 10px rgba(0,0,0,.13);cursor:pointer;z-index:3999;color:#555;padding:0;transition:opacity .2s,box-shadow .15s}#mob-top-btn:hover{box-shadow:0 4px 16px rgba(0,0,0,.18)}}}</style>
+  <button id="mob-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="맨 위로"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg></button>
+</body>
 </html>
