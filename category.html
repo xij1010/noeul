@@ -464,7 +464,7 @@
     .cat-sub:hover{color:#FF0019}
     .cat-contact{font-size:0.9375rem;color:#888;padding:var(--v0_875) 0;white-space:nowrap}
     .section-inner{width:100%;max-width:67.7083vw;margin:0 auto}
-    .section-title{margin:0 0 var(--v1_5);color:#111;font-size:2.5rem;font-weight:700;line-height:1.2;letter-spacing:-.02em}
+    .section-title{margin:0 0 var(--v1_5);color:#111;font-size:2.0625rem;font-weight:700;line-height:1.2;letter-spacing:-.02em}
     .best-product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--v1_5) 1.0417vw}
     
     
@@ -533,8 +533,8 @@
     <div class="header-inner">
       <div>
         <a href="index.html" class="logo">
-          <img src="./img/노을상사.png" alt="노을상사 로고" />
-          <span class="logo-text">(주)노을상사</span>
+          <img src="./img/노을상사.png" alt="노을상사 로고" /><span class="logo-text">(주)노을상사</span>
+          
         </a>
       </div>
       <div class="header-search">
@@ -572,7 +572,7 @@
     </div>
   </div>
 
-  <!-- 모바일 헤더 -->
+  
   <header class="mobile-header">
     <div class="mobile-header-inner">
       <div class="mobile-header-side">
@@ -580,8 +580,8 @@
         <button class="mobile-search-toggle" id="mobileSearchToggle" aria-label="검색"><iconify-icon icon="ph:magnifying-glass-bold"></iconify-icon></button>
       </div>
       <a href="index.html" class="mobile-logo" aria-label="노을상사">
-        <img src="./img/노을상사.png" alt="노을상사 로고" />
-        <span class="mobile-logo-text">(주)노을상사</span>
+        <img src="./img/노을상사.png" alt="노을상사 로고" /><span class="mobile-logo-text">(주)노을상사</span>
+        
       </a>
       <div class="mobile-header-side right">
         <a href="login.html" id="mobileUserLink" aria-label="마이페이지"><iconify-icon icon="ph:user-bold"></iconify-icon></a>
@@ -630,7 +630,6 @@
       }
     })();
   </script>
-
 
   <div class="all-category-panel" id="allCategoryPanel">
     <div class="mobile-menu-user" aria-label="사용자">
@@ -696,7 +695,7 @@
     </div>
   </div>
 
-  <!-- 모바일 필터 슬라이드 패널 -->
+  
   <div class="mobile-filter-overlay" id="mobileFilterOverlay" onclick="closeMobileFilter()"></div>
   <div class="mobile-filter-panel" id="mobileFilterPanel">
     <div class="mobile-filter-panel-header">
@@ -953,8 +952,8 @@
       <div style="padding-bottom:0;display:flex;justify-content:space-between;align-items:flex-start;gap:var(--v3_75) 3.125vw">
         <div style="flex:1;min-width:0">
           <div class="footer-logo-row" style="display:flex;align-items:center;gap:0;margin-bottom:var(--v1_25)">
-            <img class="footer-logo-img" src="./img/노을상사.png" alt="노을상사 로고" style="height:var(--v3_25);object-fit:contain;display:block;margin-left:-0.6771vw">
-            <span class="footer-logo-text" style="font-size:1.5rem;font-weight:800;color:#111;letter-spacing:.04em;line-height:1;margin-left:-0.2083vw">(주)노을상사</span>
+            <img class="footer-logo-img" src="./img/노을상사.png" alt="노을상사 로고" style="height:var(--v3_25);object-fit:contain;display:block;margin-left:-0.6771vw"><span class="footer-logo-text" style="font-size:1.5rem;font-weight:800;color:#111;letter-spacing:.04em;line-height:1;margin-left:-0.2083vw">(주)노을상사</span>
+            
           </div>
           <div class="footer-info-row" style="font-size:0.8125rem;color:#888;display:flex;flex-wrap:wrap;align-items:center;gap:0;line-height:2;padding-bottom:var(--v0_625);border-bottom:1px solid #e0e0e0">
             <span>대표이사 : 고도혁</span><span style="margin:0 0.5208vw;color:#ccc">·</span>
@@ -1530,7 +1529,7 @@
         var size = sizeRanges[i % sizeRanges.length];
         var nm = p.n.replace(/"/g,'&quot;');
         var cat = catName.replace(/"/g,'&quot;');
-        return '<div class="bp-item" onclick="goProduct(this)" data-name="'+nm+'" data-cat="'+cat+'" data-price="'+p.orig+'" style="cursor:pointer;"><div class="bp-img"></div><div class="bp-info"><div class="bp-colors">'+dots+'</div><div class="bp-sizes">'+size+'</div><div class="bp-name"><span>'+p.n+'</span><button class="bp-wish" onclick="event.stopPropagation();toggleWish(this)" title="관심상품"><iconify-icon icon="ph:heart" width="1em" height="1em"></iconify-icon></button></div><div class="bp-price-row"><span class="bp-disc">'+p.disc+'%</span><span class="bp-final">'+p.final.toLocaleString()+'원</span><span class="bp-orig">'+p.orig.toLocaleString()+'원</span></div></div></div>';
+        return '<div class="bp-item" onclick="goProduct(this)" data-name="'+nm+'" data-cat="'+cat+'" data-price="'+p.orig+'" style="cursor:pointer;"><div class="bp-img"></div><div class="bp-info"><div class="bp-colors">'+dots+'</div><div class="bp-sizes">'+size+'</div><div class="bp-name"><span>'+p.n+'</span><button class="bp-wish" onclick="event.stopPropagation();toggleWish(this)" title="관심상품"><iconify-icon icon="ph:heart" width="1em" height="1em"></iconify-icon></button></div><div class="bp-price-row"><span class="bp-final">(견적문의)</span></div></div></div>';
       }
 
       function renderBestProducts(){
@@ -1595,13 +1594,13 @@
     })();
   </script>
 
-  <!-- 고정 왼쪽 배너 -->
+  
   <div style="position:fixed;left:2.7083vw;top:55%;transform:translateY(-50%);z-index:9000">
     <div style="width:6.7708vw;aspect-ratio:9/16;border-radius:8px;box-shadow:2px 2px 12px rgba(0,0,0,0.18);overflow:hidden">
       <img src="./img/왼쪽배너.png" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block">
     </div>
   </div>
-  <!-- 고정 왼쪽 하단 전화상담 -->
+  
   <div style="position:fixed;left:2.7083vw;bottom:var(--v8_75);z-index:9000;display:flex;align-items:center;box-shadow:2px 2px 12px rgba(0,0,0,0.18);border-radius:999px">
     <div style="background:#FF0019;width:3.5rem;height:3.5rem;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative;z-index:1">
       <iconify-icon icon="ph:phone-bold" width="24" height="24" style="color:#fff"></iconify-icon>
@@ -1610,7 +1609,7 @@
       <span style="font-size:1.25rem;color:#111;font-weight:600">전화상담</span>
     </div>
   </div>
-  <!-- 고정 오른쪽 메뉴바 -->
+  
   <div style="position:fixed;right:2.7083vw;top:50%;transform:translateY(-50%);z-index:9000">
     <div style="background:#fff;border:1px solid #FF0019;border-radius:12px;box-shadow:-2px 2px 12px rgba(0,0,0,0.12);overflow:hidden;display:flex;flex-direction:column;width:auto;min-width:3.75vw">
       <a href="tel:0507-1378-6094" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--v0_375) 0.3125vw;padding:var(--v1_125) 0.5208vw;text-decoration:none;border-bottom:1px solid #f0f0f0">
@@ -1639,7 +1638,7 @@
       </button>
     </div>
   </div>
-  <!-- 채널톡 -->
+  
   <script>
     (function(){
       var w=window;
@@ -1688,7 +1687,7 @@
   }
 })();
 </script>
-  <!-- 모바일 TOP 버튼 -->
+  
   <style>#mob-top-btn{display:none}@media(max-width:768px){#mob-top-btn{display:flex;align-items:center;justify-content:center;position:fixed;bottom:5.5rem;right:1rem;width:2.75rem;height:2.75rem;background:#fff;border:1.5px solid #e0e0e0;border-radius:50%;box-shadow:0 2px 10px rgba(0,0,0,.13);cursor:pointer;z-index:3999;color:#555;padding:0;transition:opacity .2s,box-shadow .15s}#mob-top-btn:hover{box-shadow:0 4px 16px rgba(0,0,0,.18)}}}</style>
   <button id="mob-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="맨 위로"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg></button>
 </body>

@@ -301,8 +301,8 @@
   <div class="header-inner">
     <div class="header-left">
       <a href="index.html" class="logo" aria-label="노을상사">
-        <img src="./img/노을상사.png" alt="노을상사 로고" />
-        <span class="logo-text">(주)노을상사</span>
+        <img src="./img/노을상사.png" alt="노을상사 로고" /><span class="logo-text">(주)노을상사</span>
+        
       </a>
     </div>
     <div class="header-search">
@@ -340,7 +340,7 @@
   </div>
 </div>
 
-  <!-- 모바일 헤더 -->
+  
   <header class="mobile-header">
     <div class="mobile-header-inner">
       <div class="mobile-header-side">
@@ -348,8 +348,8 @@
         <button class="mobile-search-toggle" id="mobileSearchToggle" aria-label="검색"><iconify-icon icon="ph:magnifying-glass-bold"></iconify-icon></button>
       </div>
       <a href="index.html" class="mobile-logo" aria-label="노을상사">
-        <img src="./img/노을상사.png" alt="노을상사 로고" />
-        <span class="mobile-logo-text">(주)노을상사</span>
+        <img src="./img/노을상사.png" alt="노을상사 로고" /><span class="mobile-logo-text">(주)노을상사</span>
+        
       </a>
       <div class="mobile-header-side right">
         <a href="login.html" id="mobileUserLink" aria-label="마이페이지"><iconify-icon icon="ph:user-bold"></iconify-icon></a>
@@ -398,7 +398,6 @@
       });
     })();
   </script>
-
 
 <div class="all-category-panel" id="allCategoryPanel">
     <div class="mobile-menu-user" aria-label="사용자">
@@ -491,7 +490,7 @@
     <div class="cart-page-title">장바구니</div>
 
     <div class="cart-layout">
-      <!-- 왼쪽: 상품 목록 -->
+      
       <div>
         <div class="cart-action-bar">
           <label class="cart-check-all">
@@ -502,22 +501,22 @@
         <div id="cartItems"></div>
       </div>
 
-      <!-- 오른쪽: 주문 요약 -->
+      
       <div class="summary-box">
         <div class="summary-box-title">주문 요약</div>
         <div class="summary-row">
           <span class="summary-lbl">상품금액</span>
-          <span class="summary-val" id="sumProduct">0원</span>
+          <span class="summary-val">(견적문의)</span>
         </div>
         <div class="summary-row">
           <span class="summary-lbl">배송비</span>
-          <span class="summary-val" id="sumShipping">0원</span>
+          <span class="summary-val">(견적문의)</span>
         </div>
         <div class="summary-final">
           <span class="summary-final-lbl">총 결제금액</span>
-          <span class="summary-final-amt" id="sumTotal">0원</span>
+          <span class="summary-final-amt">(견적문의)</span>
         </div>
-        <button class="cart-order-btn" onclick="goOrder()">주문하기</button>
+        <button class="cart-order-btn" onclick="goOrder()">시안 요청</button>
         <button class="cart-continue-btn" onclick="location.href='index.html'">쇼핑 계속하기</button>
       </div>
     </div>
@@ -527,8 +526,8 @@
 <footer style="background:#f5f5f5;color:#888;padding:var(--v1_875) 1.25vw var(--v5_625)">
   <div style="width:100%;max-width:67.7083vw;margin:0 auto">
     <div class="footer-logo-row" style="display:flex;align-items:center;gap:0;margin-bottom:var(--v1_25)">
-      <img class="footer-logo-img" src="./img/노을상사.png" alt="노을상사 로고" style="height:var(--v3_25);object-fit:contain;display:block;margin-left:-0.6771vw">
-      <span class="footer-logo-text" style="font-size:1.5rem;font-weight:800;color:#111;letter-spacing:.04em;line-height:1;margin-left:-0.2083vw">(주)노을상사</span>
+      <img class="footer-logo-img" src="./img/노을상사.png" alt="노을상사 로고" style="height:var(--v3_25);object-fit:contain;display:block;margin-left:-0.6771vw"><span class="footer-logo-text" style="font-size:1.5rem;font-weight:800;color:#111;letter-spacing:.04em;line-height:1;margin-left:-0.2083vw">(주)노을상사</span>
+      
     </div>
     <div class="footer-info-row" style="font-size:0.8125rem;color:#888;display:flex;flex-wrap:wrap;align-items:center;gap:0;line-height:2;padding-bottom:var(--v0_625);border-bottom:1px solid #e0e0e0">
       <span>대표이사 : 고도혁</span><span style="margin:0 0.5208vw;color:#ccc">·</span>
@@ -565,7 +564,6 @@
   </div>
 </footer>
 
-<!-- 고정 왼쪽 배너 -->
 <div style="position:fixed;left:2.7083vw;top:55%;transform:translateY(-50%);z-index:9000">
   <div style="width:6.7708vw;aspect-ratio:9/16;border-radius:8px;box-shadow:2px 2px 12px rgba(0,0,0,0.18);overflow:hidden">
     <img src="./img/왼쪽배너.png" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block">
@@ -580,7 +578,6 @@
   </div>
 </div>
 
-<!-- 고정 오른쪽 메뉴바 -->
 <div style="position:fixed;right:2.7083vw;top:50%;transform:translateY(-50%);z-index:9000">
   <div style="background:#fff;border:1px solid #FF0019;border-radius:12px;box-shadow:-2px 2px 12px rgba(0,0,0,0.12);overflow:hidden;display:flex;flex-direction:column;width:auto;min-width:3.75vw">
     <a href="tel:0507-1378-6094" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--v0_375) 0.3125vw;padding:var(--v1_125) 0.5208vw;text-decoration:none;border-bottom:1px solid #f0f0f0">
@@ -662,7 +659,7 @@
               '<span class="cart-item-qty-lbl">총 '+item.totalQty+'벌</span>'+
               '<div class="cart-item-price-wrap">'+
                 discTxt+
-                '<span class="cart-item-price">'+item.totalAmt.toLocaleString()+'원</span>'+
+                '<span class="cart-item-price">(견적문의)</span>'+
               '</div>'+
             '</div>'+
           '</div>'+
@@ -775,7 +772,6 @@
   updateCartCount();
 </script>
 
-<!-- 채널톡 -->
 <script>
   (function(){
     var w=window;if(w.ChannelIO){return;}
@@ -817,7 +813,7 @@
   }
 })();
 </script>
-  <!-- 모바일 TOP 버튼 -->
+  
   <style>#mob-top-btn{display:none}@media(max-width:768px){#mob-top-btn{display:flex;align-items:center;justify-content:center;position:fixed;bottom:5.5rem;right:1rem;width:2.75rem;height:2.75rem;background:#fff;border:1.5px solid #e0e0e0;border-radius:50%;box-shadow:0 2px 10px rgba(0,0,0,.13);cursor:pointer;z-index:3999;color:#555;padding:0;transition:opacity .2s,box-shadow .15s}#mob-top-btn:hover{box-shadow:0 4px 16px rgba(0,0,0,.18)}}}</style>
   <button id="mob-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="맨 위로"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg></button>
 </body>
