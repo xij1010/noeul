@@ -459,6 +459,7 @@
       .member-avatar { width: 2.75rem !important; height: 2.75rem !important; font-size: 1rem !important; margin-right: 0.625rem !important; box-shadow: 0 0 0 3px rgba(255,0,25,.25) !important; }
       .member-name { font-size: 1.125rem !important; white-space: nowrap !important; }
       .member-type-badge { font-size: 0.5625rem !important; padding: 0.125rem 0.4375rem !important; margin-bottom: 0.2rem !important; }
+      .member-type-badge.business { color: #1d4ed8 !important; background: #eff6ff !important; border-color: #bfdbfe !important; }
       .member-suffix { font-size: 0.8125rem !important; margin-right: 0.5rem !important; }
       .member-bar-inner > div[style*="margin-left"] { margin-left: 0.75rem !important; }
       .member-stat { padding: 0 0.625rem !important; }
@@ -862,7 +863,7 @@
         <div class="member-bar-deco"></div>
         <div class="member-avatar" style="position:relative;z-index:1">고</div>
         <div style="position:relative;z-index:1">
-          <span class="member-type-badge" style="display:inline-block;font-size:0.6875rem;font-weight:500;color:#777;background:#f0f0f2;border:1px solid #e0e0e4;border-radius:2rem;padding:0.1875rem 0.625rem;margin-bottom:var(--v0_375);letter-spacing:0.02em">개인 회원</span>
+          <span id="memberTypeBadge" class="member-type-badge" style="display:inline-block;font-size:0.6875rem;font-weight:500;color:#777;background:#f0f0f2;border:1px solid #e0e0e4;border-radius:2rem;padding:0.1875rem 0.625rem;margin-bottom:var(--v0_375);letter-spacing:0.02em">개인 회원</span>
           <div style="display:flex;align-items:baseline;gap:var(--v0_25) 0.2083vw">
             <span class="member-name">고도혁</span>
             <span class="member-suffix">님</span>
@@ -1964,6 +1965,17 @@
   var mobileUserLink = document.getElementById('mobileUserLink');
   if(mobileUserLink) mobileUserLink.href = 'mypage.html';
   if(mobileMenuUserText) mobileMenuUserText.textContent = '고도혁';
+  var badge = document.getElementById('memberTypeBadge');
+  if(badge) {
+    var mType = localStorage.getItem('noeulMemberType') || 'personal';
+    if(mType === 'business') {
+      badge.textContent = '기업 회원';
+      badge.classList.add('business');
+    } else {
+      badge.textContent = '개인 회원';
+      badge.classList.remove('business');
+    }
+  }
   if(mobileMenuHonorific) mobileMenuHonorific.style.display='';
   var mobLogout=document.getElementById('mobileMenuLogout');if(mobLogout){mobLogout.style.display='';mobLogout.onclick=function(){localStorage.removeItem('noeulLoggedIn');location.reload();};}
   var utils = document.querySelector('.header-utils');
